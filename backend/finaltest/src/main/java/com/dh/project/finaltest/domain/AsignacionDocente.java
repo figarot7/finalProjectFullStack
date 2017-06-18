@@ -1,6 +1,7 @@
 package com.dh.project.finaltest.domain;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
@@ -12,7 +13,9 @@ import java.util.Date;
 public class AsignacionDocente {
     @Id
     private String id;
+    @DBRef
     private Docente docente;
+    @DBRef
     private Materia materia;
     private Date fechaAsignacion;
 
