@@ -1,5 +1,6 @@
 package com.dh.project.finaltest.web;
 
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -8,5 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/asignacionEstudiantes")
+@Api(value="Sistema de administración de estudiantes", description="Operaciones relacionadas a Asignacion de Estudiantes")
 public class AsignacionEstudianteController {
 }
