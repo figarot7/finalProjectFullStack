@@ -1,9 +1,14 @@
 package com.dh.project.finaltest.domain;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 /**
  * Created by skypper on 17-06-17.
  */
+@Document
 public class Tarea {
+    @Id
     private String id;
     private String nombre;
     private String estado;

@@ -1,11 +1,16 @@
 package com.dh.project.finaltest.domain;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.util.Date;
 
 /**
  * Created by skypper on 17-06-17.
  */
+@Document
 public class AsignacionTarea {
+    @Id
     private String id;
     private Estudiante estudiante;
     private Materia materia;
