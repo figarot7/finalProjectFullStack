@@ -23,6 +23,7 @@ public class EstudianteController {
     public List<Estudiante> getAllEstudiantes(){
         return  estudianteService.getAllEstudiantes();
     }
+
     @RequestMapping(method = RequestMethod.POST)
     public void createEstudiante(@RequestBody RequestEstudianteDTO  requestEstudianteDTO){
         estudianteService.createEstudiante(requestEstudianteDTO);

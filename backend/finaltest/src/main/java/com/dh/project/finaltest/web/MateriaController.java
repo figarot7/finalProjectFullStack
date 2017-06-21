@@ -23,6 +23,7 @@ public class MateriaController {
     public List<Materia> getAllMaterias(){
         return  materiaService.getAllMaterias();
     }
+
     @RequestMapping(method = RequestMethod.POST)
     public void createMateria(@RequestBody RequestMateriaDTO  requestMateriaDTO){
         materiaService.createMateria(requestMateriaDTO);

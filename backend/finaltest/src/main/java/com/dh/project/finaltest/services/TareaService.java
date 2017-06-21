@@ -4,6 +4,7 @@ import com.dh.project.finaltest.domain.Tarea;
 import com.dh.project.finaltest.repository.TareaRepository;
 import com.dh.project.finaltest.web.TareaController;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -18,18 +19,37 @@ public class TareaService {
     private TareaRepository tareaRepository;
 
     public List<Tarea> getAllTareas() {
-        return null;
+        return tareaRepository.findAll();
     }
 
     public void createTarea(TareaController.RequestTareaDTO requestTareaDTO) {
+        Tarea tarea = new Tarea();
+        tarea.setNombre(requestTareaDTO.getNombre());
+        tarea.setEstado(requestTareaDTO.getEstado());
+        tarea.setDescripcion(requestTareaDTO.getDescripcion());
+        tareaRepository.save(tarea);
     }
 
     public ResponseEntity<Tarea> getTareaById(String id) {
-        return null;
+        Tarea tarea = tareaRepository.findOne(id);
+        if(tarea == null){
+            return new ResponseEntity<Tarea>(HttpStatus.NOT_FOUND);
+        }else{
+            return new ResponseEntity<Tarea>(tarea, HttpStatus.OK);
+        }
     }
 
     public ResponseEntity<Tarea> updateTarea(TareaController.RequestTareaDTO requestTareaDTO, String id) {
-        return null;
+        Tarea tarea = tareaRepository.findOne(id);
+        if(tarea == null){
+            return new ResponseEntity<Tarea>(HttpStatus.NOT_FOUND);
+        }else{
+            tarea.setNombre(requestTareaDTO.getNombre());
+            tarea.setEstado(requestTareaDTO.getEstado());
+            tarea.setDescripcion(requestTareaDTO.getDescripcion());
+            tareaRepository.save(tarea);
+            return new ResponseEntity<Tarea>(tarea, HttpStatus.OK);
+        }
     }
 
     public void deleteTarea(String id) {
