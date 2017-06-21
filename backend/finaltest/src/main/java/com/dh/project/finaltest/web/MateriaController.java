@@ -1,10 +1,13 @@
 package com.dh.project.finaltest.web;
 
+import com.dh.project.finaltest.domain.Materia;
 import com.dh.project.finaltest.services.MateriaService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * Created by skypper on 17-06-17.
@@ -15,6 +18,30 @@ import org.springframework.web.bind.annotation.RestController;
 public class MateriaController {
     @Autowired
     private MateriaService materiaService;
+
+    @RequestMapping(method = RequestMethod.GET)
+    public List<Materia> getAllMaterias(){
+        return  materiaService.getAllMaterias();
+    }
+    @RequestMapping(method = RequestMethod.POST)
+    public void createMateria(@RequestBody RequestMateriaDTO  requestMateriaDTO){
+        materiaService.createMateria(requestMateriaDTO);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/{id}")
+    public ResponseEntity<Materia> getMateriaById(@PathVariable String id){
+        return materiaService.getMateriaById(id);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
+    public ResponseEntity<Materia> updateMateria(@RequestBody RequestMateriaDTO requestMateriaDTO, @PathVariable String id){
+        return materiaService.updateMateria(requestMateriaDTO, id);
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
+    public void deleteMateria(@PathVariable String id){
+        materiaService.deleteMateria(id);
+    }
 
     public static class RequestMateriaDTO{
 

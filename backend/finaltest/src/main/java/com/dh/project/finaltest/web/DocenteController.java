@@ -1,10 +1,13 @@
 package com.dh.project.finaltest.web;
 
+import com.dh.project.finaltest.domain.Docente;
 import com.dh.project.finaltest.services.DocenteService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * Created by skypper on 17-06-17.
@@ -15,6 +18,30 @@ import org.springframework.web.bind.annotation.RestController;
 public class DocenteController {
     @Autowired
     private DocenteService docenteService;
+
+    @RequestMapping(method = RequestMethod.GET)
+    public List<Docente> getAllDocentes(){
+        return  docenteService.getAllDocentes();
+    }
+    @RequestMapping(method = RequestMethod.POST)
+    public void createDocente(@RequestBody RequestDocenteDTO  requestDocenteDTO){
+        docenteService.createDocente(requestDocenteDTO);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/{id}")
+    public ResponseEntity<Docente> getDocenteById(@PathVariable String id){
+        return docenteService.getDocenteById(id);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
+    public ResponseEntity<Docente> updateDocente(@RequestBody RequestDocenteDTO requestDocenteDTO, @PathVariable String id){
+        return docenteService.updateDocente(requestDocenteDTO, id);
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
+    public void deleteDocente(@PathVariable String id){
+        docenteService.deleteDocente(id);
+    }
 
     public static class RequestDocenteDTO{
 

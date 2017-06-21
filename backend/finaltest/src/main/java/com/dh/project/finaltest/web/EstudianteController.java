@@ -1,10 +1,13 @@
 package com.dh.project.finaltest.web;
 
+import com.dh.project.finaltest.domain.Estudiante;
 import com.dh.project.finaltest.services.EstudianteService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * Created by skypper on 17-06-17.
@@ -15,6 +18,30 @@ import org.springframework.web.bind.annotation.RestController;
 public class EstudianteController {
     @Autowired
     private EstudianteService estudianteService;
+
+    @RequestMapping(method = RequestMethod.GET)
+    public List<Estudiante> getAllEstudiantes(){
+        return  estudianteService.getAllEstudiantes();
+    }
+    @RequestMapping(method = RequestMethod.POST)
+    public void createEstudiante(@RequestBody RequestEstudianteDTO  requestEstudianteDTO){
+        estudianteService.createEstudiante(requestEstudianteDTO);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/{id}")
+    public ResponseEntity<Estudiante> getEstudianteById(@PathVariable String id){
+        return estudianteService.getEstudianteById(id);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
+    public ResponseEntity<Estudiante> updateEstudiante(@RequestBody RequestEstudianteDTO requestEstudianteDTO, @PathVariable String id){
+        return estudianteService.updateEstudiante(requestEstudianteDTO, id);
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
+    public void deleteEstudiante(@PathVariable String id){
+        estudianteService.deleteEstudiante(id);
+    }
 
     public static class RequestEstudianteDTO{
 

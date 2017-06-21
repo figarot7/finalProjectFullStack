@@ -1,10 +1,13 @@
 package com.dh.project.finaltest.web;
 
+import com.dh.project.finaltest.domain.Tarea;
 import com.dh.project.finaltest.services.TareaService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * Created by skypper on 17-06-17.
@@ -15,6 +18,30 @@ import org.springframework.web.bind.annotation.RestController;
 public class TareaController {
     @Autowired
     private TareaService tareaService;
+
+    @RequestMapping(method = RequestMethod.GET)
+    public List<Tarea> getAllTareas(){
+        return  tareaService.getAllTareas();
+    }
+    @RequestMapping(method = RequestMethod.POST)
+    public void createTarea(@RequestBody RequestTareaDTO  requestTareaDTO){
+        tareaService.createTarea(requestTareaDTO);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/{id}")
+    public ResponseEntity<Tarea> getTareaById(@PathVariable String id){
+        return tareaService.getTareaById(id);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
+    public ResponseEntity<Tarea> updateTarea(@RequestBody RequestTareaDTO requestTareaDTO, @PathVariable String id){
+        return tareaService.updateTarea(requestTareaDTO, id);
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
+    public void deleteTarea(@PathVariable String id){
+        tareaService.deleteTarea(id);
+    }
 
     public static class RequestTareaDTO{
 
